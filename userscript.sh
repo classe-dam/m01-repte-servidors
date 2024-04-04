@@ -54,7 +54,16 @@ do
 done
 clear
 
+
 current_month_year=$(date +"%Y-%m")
+datafile="incidencies.txt"
+# calulate the item id
+id=1
+while IFS= read -r line; do
+    data+=("$line")
+    id=$(awk -F ';' '{print $NF}' <<< "$line")
+done < "$datafile"
+id=$(expr $id + 1)
 # Guardar los datos en data.txt
-data=";;open;$incidenceType;$email;$desc;$current_month_year"
+data=";;open;$incidenceType;$email;$desc;$current_month_year;$id"
 echo "$data" >> incidencies.txt
