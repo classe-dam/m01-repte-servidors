@@ -23,18 +23,22 @@ function gestionarIncidencies() {
         case $opcio in
             1)
                 echo "Has seleccionat mostrar totes les incidències"
+                printIncidences "all"
                 continue
                 ;;
             2)
                 echo "Has seleccionat mostrar les incidències obertes"
+                printIncidences "open"
                 continue
                 ;;
             3)
                 echo "Has seleccionat mostrar les incidències en procés"
+                printIncidences "progress"
                 continue
                 ;;
             4)
                 echo "Has seleccionat mostrar les incidències tancades"
+                printIncidences "closed"
                 continue
                 ;;
             5)
@@ -63,7 +67,48 @@ function continue(){
     read foo
 }
 
-while true; do
+function printIncidence(){
+    echo "$1"
+}
+
+function printIncidences(){
+    status="$1"
+
+    echo "status: $1"
+
+    while IFS= read -r line; do
+        linestatus=$(awk -F ';' '{print $3}' <<< "$line")
+        if [ "$status" = "all" ]; then
+            echo "file status: $status"
+        elif [ "$linestatus" = "$status" ]; then 
+            echo "file status: $linestatus"
+        fi
+
+        
+    done < "$file"
+
+}
+
+file="incidencies.txt"
+
+# read line by line
+# while IFS= read -r line; do
+#     # Split the line by semicolon into an array
+#     IFS=';' read -ra parts <<< "$line"
+    
+#     # Add the array of parts to the main data array
+#     data+=("${parts[@]}")
+# done < "$file"
+
+# # Output the array (for demonstration)
+# for i in $(seq 0 $(( ${#data[@]} - 1 ))); do
+#     echo "Line $((i+1)): ${data[i]}"
+# done
+
+
+runmain=true
+
+while $runmain; do
     echo ""
     echo ""
     echo ""
@@ -89,7 +134,7 @@ while true; do
             ;;
         0)
             echo "Adéu!"
-            exit 0  
+            runmain=false  
             ;;
         *)
             echo "Opció invàlida. Si us plau, tria una opció vàlida."
