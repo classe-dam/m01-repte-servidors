@@ -1,9 +1,9 @@
 ;;open;Servei Caigut;email.com;description;2024-04;1
 ;;open;Pagina No Obre;email@email.com;description;2024-04;2
-;;open;Pagina No Obre;test;description;2024-04;3
-;;progress;Pagina No Obre;test;description;2024-04;3
-;;progress;Pagina No Obre;email@gmail.com;description of the issue;2024-04;4
-;;open;Pagina No Obre;email@gmail.com;description of the issue;2024-04;4
-;;closed;Servei Caigut;email.com;description;2024-04;1
-;;closed;Pagina No Obre;email@email.com;description;2024-04;2
-;;closed;Pagina No Obre;test;description;2024-04;3
+;;open;Pagina No Obre;test;description;2024-04;4
+;;progress;Pagina No Obre;test;description;2024-04;6
+;;progress;Pagina No Obre;email@gmail.com;description of the issue;2024-04;6
+;;open;Pagina No Obre;email@gmail.com;description of the issue;2024-04;7
+;;closed;Servei Caigut;email.com;description;2024-04;8
+;;closed;Pagina No Obre;email@email.com;description;2024-04;9
+;;closed;Pagina No Obre;test;description;2024-04;10

@@ -68,43 +68,37 @@ function continue(){
 }
 
 function printIncidence(){
-    echo "$1"
+    errorMsg=$(awk -F ';' '{print $4}' <<< "$1")
+    email=$(awk -F ';' '{print $5}' <<< "$1")
+    description=$(awk -F ';' '{print $6}' <<< "$1")
+    date=$(awk -F ';' '{print $6}' <<< "$1")
+    date=$(awk -F ';' '{print $7}' <<< "$1")
+
+    if [ "$2" = "all" ]; then
+        echo "||"
+    elif [ "$linestatus" = "$status" ]; then 
+        printIncidence $line ""
+    fi
 }
 
 function printIncidences(){
     status="$1"
 
-    echo "status: $1"
-
+    echo "---------------- Mostrar incidencias pel status: $status ----------------------"
     while IFS= read -r line; do
         linestatus=$(awk -F ';' '{print $3}' <<< "$line")
         if [ "$status" = "all" ]; then
-            echo "file status: $status"
+            printIncidence $line "all"
         elif [ "$linestatus" = "$status" ]; then 
-            echo "file status: $linestatus"
+            printIncidence $line ""
         fi
-
+        
         
     done < "$file"
 
 }
 
 file="incidencies.txt"
-
-# read line by line
-# while IFS= read -r line; do
-#     # Split the line by semicolon into an array
-#     IFS=';' read -ra parts <<< "$line"
-    
-#     # Add the array of parts to the main data array
-#     data+=("${parts[@]}")
-# done < "$file"
-
-# # Output the array (for demonstration)
-# for i in $(seq 0 $(( ${#data[@]} - 1 ))); do
-#     echo "Line $((i+1)): ${data[i]}"
-# done
-
 
 runmain=true
 
@@ -117,7 +111,7 @@ while $runmain; do
     echo "1. Gestionar incidències"
     echo "2. Resoldre incidència"
     echo "0. Sortir"
-    echo "--------------------------"
+    echo "---------------------------"
     read -p "Selecciona una opció: " opcio
     echo ""
     echo ""
