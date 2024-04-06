@@ -43,6 +43,27 @@ function gestionarIncidencies() {
                 ;;
             5)
                 echo "Has seleccionat mostrar incidència completa"
+                echo "Introdueix la id de la incidencia que vols mostrar"
+                read selectedId
+
+                found=false
+
+                while IFS= read -r line; do
+                incidenceId=$(awk -F ';' '{print $NF}' <<< "$line")
+                if [ "$incidenceId" = "$selectedId" ]; then
+                    printFullIncidence "$line" 
+                    found=true;
+                fi
+
+                done < "$file"
+
+                if [ "$found" = false ]; then
+                    echo ""
+                    echo "No incidence was found with id $selectedId"
+                    echo ""
+                fi
+                
+
                 continue
                 ;;
             6)
@@ -68,34 +89,57 @@ function continue(){
 }
 
 function printIncidence(){
+    
     errorMsg=$(awk -F ';' '{print $4}' <<< "$1")
-    email=$(awk -F ';' '{print $5}' <<< "$1")
-    description=$(awk -F ';' '{print $6}' <<< "$1")
-    date=$(awk -F ';' '{print $6}' <<< "$1")
+    status=$(awk -F ';' '{print $3}' <<< "$line")
     date=$(awk -F ';' '{print $7}' <<< "$1")
+    id=$(awk -F ';' '{print $8}' <<< "$1")
 
-    if [ "$2" = "all" ]; then
-        echo "||"
-    elif [ "$linestatus" = "$status" ]; then 
-        printIncidence $line ""
-    fi
+    echo "| $id | $status | $date | $errorMsg "
+}
+
+function printItem(){
+    name=$1
+    index=$2
+    line=$3
+
+    value=$(awk -F ';' '{print $'$index'}' <<< "$line")
+
+    echo "| $name = $value"
+}
+function printFullIncidence(){
+    echo "---------------- Mostrar incidencia completa de la id: $id ----------------------"
+    echo ""
+    printItem "id" 8 "$line"
+    printItem "status" 3 "$line"
+    printItem "resolverAdmin" 1 "$line"
+    printItem "adminMessage" 2 "$line"
+    printItem "errorMsg" 4 "$line"
+    printItem "email" 5 "$line"
+    printItem "description" 6 "$line"
+    printItem "date" 7 "$line"
+    echo ""
+    echo "---------------------------------------------------------------------------------"
 }
 
 function printIncidences(){
-    status="$1"
 
-    echo "---------------- Mostrar incidencias pel status: $status ----------------------"
+    echo "---------------- Mostrar incidencias pel status: $1 ----------------------"
+    echo "| id | status | fecha | mensage de error"
+    echo ""
     while IFS= read -r line; do
         linestatus=$(awk -F ';' '{print $3}' <<< "$line")
-        if [ "$status" = "all" ]; then
-            printIncidence $line "all"
+        if [ "$1" = "all" ]; then
+            printIncidence "$line" "all"
         elif [ "$linestatus" = "$status" ]; then 
-            printIncidence $line ""
+            printIncidence "$line" ""
         fi
         
         
     done < "$file"
-
+    echo ""
+    echo "-------------------------------------------------------------------------------"
+    echo ""
 }
 
 file="incidencies.txt"
