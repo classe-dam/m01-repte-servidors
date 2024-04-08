@@ -91,7 +91,7 @@ function continue(){
 function printIncidence(){
     
     errorMsg=$(awk -F ';' '{print $4}' <<< "$1")
-    status=$(awk -F ';' '{print $3}' <<< "$line")
+    status=$(awk -F ';' '{print $3}' <<< "$1")
     date=$(awk -F ';' '{print $7}' <<< "$1")
     id=$(awk -F ';' '{print $8}' <<< "$1")
 
@@ -131,7 +131,7 @@ function printIncidences(){
         linestatus=$(awk -F ';' '{print $3}' <<< "$line")
         if [ "$1" = "all" ]; then
             printIncidence "$line" "all"
-        elif [ "$linestatus" = "$status" ]; then 
+        elif [ "$linestatus" = "$1" ]; then 
             printIncidence "$line" ""
         fi
         
