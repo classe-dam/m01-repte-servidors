@@ -67,7 +67,43 @@ function gestionarIncidencies() {
                 continue
                 ;;
             6)
-                echo "Has seleccionat canviar d'estat una incidència"
+                echo "Introdueix la id de la incidencia que vols modificar"
+                read id_canvi
+                # validate incidence xists and if it does store its status
+                found=false
+                new_status=""
+                    while IFS= read -r line; do
+                    incidenceId=$(awk -F ';' '{print $NF}' <<< "$line")
+                    if [ "$incidenceId" = "$id_canvi" ]; then
+                        opcio=$(awk -F ';' '{print $3}' <<< "$line")
+                        found=true;
+                        case $opcio in
+                            "open")
+                                new_status="progress"
+                                # update the status, create file tmp and if succes move it to the file location, 
+                                awk -v id="$id_canvi" -v new_status="$new_status" 'BEGIN{FS=OFS=";"} $NF == id {$3 = new_status; found=1} 1' "$file" > temp && mv temp "$file"  
+                                echo "La incidencia amb id $id_canvi ha cambiat el seu status de $opcio a $new_status"
+                                ;;
+                            "progress")
+                                new_status="closed"
+                                # update the status, create file tmp and if succes move it to the file location, 
+                                awk -v id="$id_canvi" -v new_status="$new_status" 'BEGIN{FS=OFS=";"} $NF == id {$3 = new_status; found=1} 1' "$file" > temp && mv temp "$file"  
+                                echo "La incidencia amb id $id_canvi ha cambiat el seu status de $opcio a $new_status"
+                                ;;
+                            *)
+                                echo "Aquesta id no pot cambiar el seu estat ja"
+                                ;;
+                        esac
+                    fi
+                done < "$file"
+
+                if [ "$found" = false ]; then
+                    echo ""
+                    echo "No s'ha trobat cap incidencia amb aquesta id $selectedId"
+                    echo ""
+                fi
+                 
+              
                 continue
                 ;;
             0)
