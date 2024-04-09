@@ -119,6 +119,63 @@ function gestionarIncidencies() {
     done
 }
 
+function solveIncidencies() {
+    run=true
+    while $run; do
+        echo ""
+        echo ""
+        echo ""
+        echo ""
+        echo "-------------- Resoldre d'Incidències --------------"
+        echo "1. Afegir i gestionar usuaris per al servidor FTP"
+        echo "2. Iniciar servidor FTP"
+        echo "3. Aturar servidor FTP"
+        echo "4. Reinciar servidor FTP"
+        echo "5. Coneixer estat servidor FTP"
+        echo "6. Resoldre Problemes acces servidor"
+        echo "7. Modificar pagina web"
+        echo "0. Sortir"
+        echo "--------------------------"
+        read -p "Escull una opció: " opcio
+        echo ""
+        echo ""
+        echo ""
+        echo ""
+        case $opcio in
+            1)
+                
+                continue
+                ;;
+            2)
+               
+                continue
+                ;;
+            3)
+               
+                continue
+                ;;
+            4)
+                
+                continue
+                ;;
+            5)
+               
+                continue
+                ;;
+            6)
+                continue
+                ;;
+            0)
+               
+                ;;
+            *)
+                continue
+                ;;
+        esac
+        
+    done
+}
+
 function continue(){
     echo "press enter to continue to the menu"
     read foo
@@ -204,7 +261,7 @@ while $runmain; do
             ;;
         2)
             echo "Has seleccionat resoldre incidència."
-            continue
+            solveIncidencies
             ;;
         0)
             echo "Adéu!"
