@@ -1,7 +1,7 @@
 #!/bin/bash
 function gestionarIncidencies() {
-    run=true
-    while $run; do
+    runGestionarIncidences=true
+    while $runGestionarIncidences; do
         echo ""
         echo ""
         echo ""
@@ -24,22 +24,22 @@ function gestionarIncidencies() {
             1)
                 echo "Has seleccionat mostrar totes les incidències"
                 printIncidences "all"
-                continue
+                runGestionarIncidences=false
                 ;;
             2)
                 echo "Has seleccionat mostrar les incidències obertes"
                 printIncidences "open"
-                continue
+                runGestionarIncidences=false
                 ;;
             3)
                 echo "Has seleccionat mostrar les incidències en procés"
                 printIncidences "progress"
-                continue
+                runGestionarIncidences=false
                 ;;
             4)
                 echo "Has seleccionat mostrar les incidències tancades"
                 printIncidences "closed"
-                continue
+                runGestionarIncidences=false
                 ;;
             5)
                 echo "Has seleccionat mostrar incidència completa"
@@ -64,7 +64,7 @@ function gestionarIncidencies() {
                 fi
                 
 
-                continue
+                runGestionarIncidences=false
                 ;;
             6)
                 echo "Introdueix la id de la incidencia que vols modificar"
@@ -104,15 +104,15 @@ function gestionarIncidencies() {
                 fi
                  
               
-                continue
+                runGestionarIncidences=false
                 ;;
             0)
                 echo "Gràcies per utilitzar el sistema de gestió d'incidències"
-                run=false
+                runGestionarIncidences=false
                 ;;
             *)
                 echo "Opció no vàlida. Si us plau, tria una opció vàlida."
-                continue
+                runGestionarIncidences=false
                 ;;
         esac
         
@@ -120,18 +120,105 @@ function gestionarIncidencies() {
 }
 
 function solveIncidencies() {
-    run=true
-    while $run; do
-        echo ""
+    runSolveIncidences=true
+    while $runSolveIncidences; do
+        echo "solveIncidencies: $runSolveIncidences"
         echo ""
         echo ""
         echo ""
         echo "-------------- Resoldre d'Incidències --------------"
+        echo "1. Gestionar servei FTP"
+        echo "2. Gestionar servidor web"
+        echo "0. Sortir"
+        echo "--------------------------"
+        read -p "Escull una opció: " opcio
+        echo ""
+        echo ""
+        echo ""
+        echo ""
+        case $opcio in
+            1)
+                gestionarFTP
+                ;;
+            2)
+                gestionarServeiWeb
+                ;;            
+            0)
+                runSolveIncidences=false
+                ;;
+            *)
+                runSolveIncidences=false
+                ;;
+        esac
+        
+    done
+}
+
+function gestionarFTP() {
+    runServeiFTP=true
+    while $runServeiFTP; do
+        echo ""
+        echo ""
+        echo ""
+        echo ""
+        echo "-------------- Resoldre Servei FTP --------------"
         echo "1. Afegir i gestionar usuaris per al servidor FTP"
         echo "2. Iniciar servidor FTP"
         echo "3. Aturar servidor FTP"
         echo "4. Reinciar servidor FTP"
         echo "5. Coneixer estat servidor FTP"
+        echo "0. Sortir"
+        echo "--------------------------"
+        read -p "Escull una opció: " opcio
+        echo ""
+        echo ""
+        echo ""
+        echo ""
+        case $opcio in
+            1)
+                
+                runServeiFTP=false
+                ;;
+            2)
+               
+                runServeiFTP=false
+                ;;
+            3)
+               
+                runServeiFTP=false
+                ;;
+            4)
+                
+                runServeiFTP=false
+                ;;
+            5)
+               
+                runServeiFTP=false
+                ;;
+            0)
+                runServeiFTP=false
+                ;;
+            *)
+                runServeiFTP=false
+                ;;
+        esac
+        
+    done
+}
+
+function gestionarServeiWeb() {
+    runServeiWeb=true
+    while $runServeiWeb; do
+        echo ""
+        echo ""
+        echo ""
+        echo ""
+        echo "-------------- Resoldre Servei Web --------------"
+        echo "1. Afegir pagnes web"
+        echo "2. Iniciar servidor web"
+        echo "3. Aturar servidor web"
+        echo "4. Reinciar servidor web"
+        echo "5. Coneixer estat servidor web"
         echo "6. Resoldre Problemes acces servidor"
         echo "7. Modificar pagina web"
         echo "0. Sortir"
@@ -144,32 +231,35 @@ function solveIncidencies() {
         case $opcio in
             1)
                 
-                continue
+                runServeiWeb=false
                 ;;
             2)
                
-                continue
+                runServeiWeb=false
                 ;;
             3)
                
-                continue
+                runServeiWeb=false
                 ;;
             4)
                 
-                continue
+                runServeiWeb=false
                 ;;
             5)
                
-                continue
+                runServeiWeb=false
                 ;;
             6)
-                continue
+                runServeiWeb=false
+                ;;
+            7)
+                runServeiWeb=false
                 ;;
             0)
-               
+                runServeiWeb=false
                 ;;
             *)
-                continue
+                runServeiWeb=false
                 ;;
         esac
         
