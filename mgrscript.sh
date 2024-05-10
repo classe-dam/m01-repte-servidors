@@ -138,7 +138,7 @@ function solveIncidencies() {
         echo ""
         case $opcio in
             1)
-                gestionarFTP
+                gestionarServeisAdmin
                 ;;
             2)
                 gestionarServeiWeb
@@ -154,7 +154,7 @@ function solveIncidencies() {
     done
 }
 
-function gestionarFTP() {
+function gestionarServeisAdmin() {
     runServeiFTP=true
     while $runServeiFTP; do
         echo ""
@@ -162,11 +162,19 @@ function gestionarFTP() {
         echo ""
         echo ""
         echo "-------------- Resoldre Servei FTP --------------"
-        echo "1. Afegir i gestionar usuaris per al servidor FTP"
-        echo "2. Iniciar servidor FTP"
-        echo "3. Aturar servidor FTP"
-        echo "4. Reinciar servidor FTP"
-        echo "5. Coneixer estat servidor FTP"
+        echo "1. Afegir usuari per al servidor FTP"
+        echo "2. Esborrar usuari per al servidor FTP"
+        echo "3. Iniciar servidor FTP"
+        echo "4. Aturar servidor FTP"
+        echo "5. Reinciar servidor FTP"
+        echo "6. Coneixer estat servidor FTP"
+        echo "7. Editar web amb visual studio code"
+        echo "8. Iniciar servidor web"
+        echo "9. Aturar servidor web"
+        echo "10. Reinciar servidor web"
+        echo "11. Coneixer estat servidor web"
+        echo "12. Resoldre permisos pagina web"
+        ehco "13. Verificat si esta creada la pagina web"
         echo "0. Sortir"
         echo "--------------------------"
         read -p "Escull una opció: " opcio
@@ -194,6 +202,52 @@ function gestionarFTP() {
             5)
                
                 runServeiFTP=false
+                
+                ;;
+            5)
+               
+                runServeiFTP=false
+                
+                ;;
+            6)
+               
+                runServeiFTP=false
+                
+                ;;
+            7)
+               
+                runServeiFTP=false
+                
+                ;;
+            8)
+               
+                runServeiFTP=false
+                
+                ;;
+            9)
+               
+                runServeiFTP=false
+                
+                ;;
+            10)
+               
+                runServeiFTP=false
+                
+                ;;
+            11)
+               
+                runServeiFTP=false
+                
+                ;;
+            12)
+               
+                runServeiFTP=false
+                
+                ;;
+            13)
+               
+                runServeiFTP=false
+                
                 ;;
             0)
                 runServeiFTP=false
