@@ -205,7 +205,13 @@ function gestionarServeisAdmin() {
 
             ;;
         12)
-            
+            if [ -d "/var/www/html/jazdevv.github.io" ]; then
+                echo "han canviat els permisos de la web a 755"
+                sudo chmod -R 755 "/var/www/html/jazdevv.github.io"
+            else
+                echo "El directori de la web no existeix, no se li poden canviar els permisos"
+            fi
+          
             ;;
         13)
 
