@@ -152,7 +152,7 @@ function gestionarServeisAdmin() {
             echo ""
 
             if grep -q "^$username:" /etc/passwd; then
-                echo "L'usuari $username ja existeix!"
+                echo "L'usuari $username ja existeix"
             else
                 sudo adduser "$username"
             fi
@@ -166,7 +166,7 @@ function gestionarServeisAdmin() {
             if grep -q "^$username:" /etc/passwd; then
                 sudo deluser "$username"
             else
-                echo "L'usuari $username no existeix!"
+                echo "L'usuari $username no existeix"
             fi
 
             ;;
@@ -205,14 +205,16 @@ function gestionarServeisAdmin() {
 
             ;;
         12)
-
-            runServeiFTP=false
-
+            
             ;;
         13)
 
-            runServeiFTP=false
-
+            if [ -d "/var/www/html/jazdevv.github.io" ]; then
+                echo "El directori de la web existeix"
+            else
+                echo "El directori de la web no existeix"
+            fi
+            echo ""
             ;;
         0)
             runServeiFTP=false
@@ -225,65 +227,6 @@ function gestionarServeisAdmin() {
     done
 }
 
-function gestionarServeiWeb() {
-    runServeiWeb=true
-    while $runServeiWeb; do
-        echo ""
-        echo ""
-        echo ""
-        echo ""
-        echo "-------------- Resoldre Servei Web --------------"
-        echo "1. Afegir pagnes web"
-        echo "2. Iniciar servidor web"
-        echo "3. Aturar servidor web"
-        echo "4. Reinciar servidor web"
-        echo "5. Coneixer estat servidor web"
-        echo "6. Resoldre Problemes acces servidor"
-        echo "7. Modificar pagina web"
-        echo "0. Sortir"
-        echo "------------------------------------------------"
-        read -p "Escull una opció: " opcio
-        echo ""
-        echo ""
-        echo ""
-        echo ""
-        case $opcio in
-        1)
-
-            runServeiWeb=false
-            ;;
-        2)
-
-            runServeiWeb=false
-            ;;
-        3)
-
-            runServeiWeb=false
-            ;;
-        4)
-
-            runServeiWeb=false
-            ;;
-        5)
-
-            runServeiWeb=false
-            ;;
-        6)
-            runServeiWeb=false
-            ;;
-        7)
-            runServeiWeb=false
-            ;;
-        0)
-            runServeiWeb=false
-            ;;
-        *)
-            runServeiWeb=false
-            ;;
-        esac
-
-    done
-}
 
 function continue() {
     echo "press enter to continue to the menu"
